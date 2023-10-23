@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-//code to compile g++ init.c -lglfw3 -lopengl32 -lgdi32
+//code to compile g++ init.c glad.c -lglfw3 -lopengl32 -lgdi32
 
 static const struct
 {
