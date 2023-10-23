@@ -4,6 +4,10 @@
 
 int main(void)
 {
-	printf("hello World\n");
+	if (!glfwInit()) {
+		printf("Initialization failed\n");
+	}
+	printf("Hello World\n");
+	glfwTerminate();
 	return 0;
 }

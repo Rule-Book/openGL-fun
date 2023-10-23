@@ -8,7 +8,11 @@ I need a c or c++ compiler to use GLFW library
 https://sourceforge.net/projects/mingw/
 I need CMake or GNU Make to tailor project files to exclude noncompatible linux files
 https://cmake.org/download/
-I need *source code* for GLFW, a window toolkit, to create an openGL context to work from
-https://www.glfw.org/download (tried using cmake and it added bloat and no functionality?)
+I need *source code* of GLFW, a window toolkit, to create an openGL context to work from (source includes dll or static library)
+https://www.glfw.org/download mingw32-make
 I need GLAD, an OpenGL loading library, to generate a header file of OpenGL API functions to include in C code
 https://glad.dav1d.de 
+
+cmake GLFW source code
+https://www.glfw.org/docs/latest/compile_guide.html
+I need build output outputs libglfw3.a object file needed for linking at compilation
