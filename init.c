@@ -5,6 +5,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 //code to compile g++ init.c glad.c -lglfw3 -lopengl32 -lgdi32
 
@@ -39,6 +40,8 @@ static const char* fragment_shader_text =
 "    gl_FragColor = vec4(color, 1.0);\n"
 "}\n";
 
+static float factor = 0.5;
+
 void error_callback(int error, const char* description)
 {
     fprintf(stderr, "Error: %s\n", description);
@@ -46,8 +49,20 @@ void error_callback(int error, const char* description)
 
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, GLFW_TRUE);
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GLFW_TRUE);
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
+		factor = abs(factor) * -1.0f;
+	if (key == GLFW_KEY_SPACE && action == GLFW_RELEASE)
+		factor = abs(factor);
+	if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
+		factor = factor * 1.4f;
+	if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
+		factor = factor / 1.4f;
+	if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
+		factor = factor - 0.3f;
+	if (key == GLFW_KEY_UP && action == GLFW_PRESS)
+		factor = factor + 0.3f;
 }
 
 int main(void)
@@ -118,7 +133,7 @@ int main(void)
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		mat4x4_identity(m);
-		mat4x4_rotate_Z(m, m, (float) glfwGetTime());
+		mat4x4_rotate_Z(m, m, (float) glfwGetTime()*factor);
 		mat4x4_ortho(p, -ratio, ratio, -1.f, 1.f, 1.f, -1.f);
 		mat4x4_mul(mvp, p, m);
 
